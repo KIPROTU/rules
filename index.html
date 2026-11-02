@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>KIPROTU 규정집</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KIPROTU 규정집">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --navy:#06275e; --teal:#2fa599; --grad:linear-gradient(90deg,#2fa599 0%,#2fa599 25%,#06275e 100%);
+    --bg:#f4f6f9; --card:#fff; --ink:#1a1f2b; --sub:#677083; --line:#e2e6ee; --hl:#ffe9a8;
+    --add:#e3f5f1; --add-ink:#0f6e63; --del:#fdeaea; --del-ink:#b3261e; --fs:16px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;font-size:var(--fs)}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+  header{position:sticky;top:0;z-index:10;background:#fff;padding:calc(env(safe-area-inset-top) + 10px) 14px 12px;border-bottom:1px solid var(--line)}
+  header::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:var(--grad)}
+  .bar{display:flex;align-items:center;gap:8px;min-height:40px}
+  .brand{display:flex;align-items:flex-end;gap:8px;flex:1;min-width:0}
+  .brand img{height:26px;display:block}
+  .brand .rt{font-weight:700;color:var(--navy);font-size:1.05rem;line-height:1;padding-bottom:1px}
+  .ptitle{flex:1;font-weight:700;font-size:1.08rem;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .icon-btn{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-size:1.05rem;color:var(--navy);font-weight:700;flex:none}
+  .icon-btn:active{background:#eef1f6}
+  .search{margin-top:10px;display:flex;background:#f0f2f6;border-radius:12px;padding:0 12px;align-items:center;gap:4px}
+  .search input{flex:1;background:none;border:0;outline:0;color:var(--ink);font:inherit;padding:11px 4px;font-size:1rem;min-width:0}
+  main{padding:16px 14px calc(env(safe-area-inset-bottom) + 92px);max-width:760px;margin:0 auto}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px}
+  .doc-card{display:flex;align-items:center;gap:14px;width:100%;text-align:left}
+  .doc-ico{width:46px;height:46px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;flex:none;position:relative;overflow:hidden}
+  .doc-ico::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--grad)}
+  .doc-card .t{font-weight:700;font-size:1.05rem}
+  .doc-card .s{color:var(--sub);font-size:.84rem;margin-top:3px}
+  .sec-title{color:var(--sub);font-size:.85rem;font-weight:500;margin:6px 4px 10px}
+  .hero{background:var(--navy);color:#fff;border-radius:16px;padding:18px;margin-bottom:16px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:var(--grad)}
+  .hero .k{font-size:.82rem;opacity:.8}
+  .hero .v{font-weight:700;font-size:1.15rem;margin-top:4px}
+  .seg{display:flex;background:#e8ebf1;border-radius:12px;padding:3px;margin-bottom:12px}
+  .seg button{flex:1;padding:9px 0;border-radius:9px;font-size:.92rem;color:var(--sub);font-weight:500}
+  .seg button.on{background:#fff;color:var(--navy);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.83rem;color:var(--sub);margin:0 2px 10px}
+  .meta .sp{flex:1}
+  .link{color:var(--teal);font-weight:500;font-size:.83rem}
+  .banner{background:#fff6dd;border:1px solid #efd998;color:#6b5000;border-radius:12px;padding:11px 14px;font-size:.88rem;margin-bottom:12px;display:flex;gap:8px;align-items:center}
+  .banner b{font-weight:700}
+  .toc{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+  .toc::-webkit-scrollbar{display:none}
+  .toc button{flex:none;font-size:.8rem;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;color:var(--ink)}
+  .chapter{font-weight:700;color:var(--navy);margin:22px 4px 8px;font-size:1rem;display:flex;align-items:center;gap:8px;scroll-margin-top:150px}
+  .chapter::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--grad)}
+  .section{font-weight:700;color:var(--teal);font-size:.9rem;margin:14px 6px 8px}
+  .art{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:8px;scroll-margin-top:150px}
+  .art-head{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:13px 14px}
+  .art-head .no{font-weight:700;flex:none;color:var(--navy)}
+  .art-head .ti{flex:1;font-weight:500}
+  .art-head .chev{color:var(--sub);transition:transform .2s;flex:none}
+  .art.open .chev{transform:rotate(90deg)}
+  .art-body{display:none;padding:0 14px 14px;line-height:1.75;word-break:keep-all}
+  .art.open .art-body{display:block}
+  .art-body > span{display:block;margin-bottom:4px}
+  .ln{display:block;padding-left:1.4em;text-indent:-1.4em}
+  .tag{font-size:.7rem;font-weight:700;border-radius:6px;padding:2px 6px;flex:none}
+  .tag.new{background:var(--add);color:var(--add-ink)}
+  .tag.mod{background:#e6edf8;color:var(--navy)}
+  .tag.gone{background:var(--del);color:var(--del-ink)}
+  .art-tools{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+  .chip{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--sub);background:#fff}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip.acc{border-color:var(--teal);color:var(--teal)}
+  mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 1px}
+  .result{display:block;width:100%;text-align:left}
+  .result .where{font-size:.78rem;color:var(--sub)}
+  .result .what{font-weight:700;margin:3px 0;color:var(--navy)}
+  .result .snip{font-size:.9rem;line-height:1.6}
+  .empty{text-align:center;color:var(--sub);padding:44px 10px;line-height:1.7}
+  /* 연혁 */
+  .tl{position:relative;padding-left:22px}
+  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-item{position:relative;margin-bottom:12px}
+  .tl-item::before{content:"";position:absolute;left:-20px;top:20px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--teal)}
+  .tl-item.cur::before{background:var(--navy);border-color:var(--navy)}
+  .tl-item .d{font-weight:700;color:var(--navy)}
+  .tl-item .l{font-size:.85rem;color:var(--sub);margin-top:2px}
+  .tl-item .n{font-size:.88rem;margin-top:6px;line-height:1.6}
+  /* 신구대비 */
+  .cmp{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+  .cmp-h{padding:12px 14px;display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--line);font-weight:700;color:var(--navy)}
+  .cmp-c{padding:12px 14px;line-height:1.75;word-break:keep-all;font-size:.95rem}
+  .cmp-c .lab{font-size:.75rem;font-weight:700;color:var(--sub);margin-bottom:4px}
+  .cmp-c + .cmp-c{border-top:1px dashed var(--line)}
+  .cmp-c.old{background:#fafbfc}
+  ins{background:var(--add);color:var(--add-ink);text-decoration:none;border-radius:3px;font-weight:500}
+  del{background:var(--del);color:var(--del-ink);border-radius:3px}
+  .sum{display:flex;gap:8px;margin-bottom:12px}
+  .sum div{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+  .sum b{display:block;font-size:1.2rem;color:var(--navy)}
+  .sum span{font-size:.75rem;color:var(--sub)}
+  nav.tabs{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;padding:6px 0 calc(env(safe-area-inset-bottom) + 6px);z-index:10}
+  nav.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.72rem;color:#9aa1b0;padding:4px 0}
+  nav.tabs svg{width:22px;height:22px}
+  nav.tabs button.on{color:var(--navy);font-weight:700}
+  .sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:20;display:none}
+  .sheet{position:fixed;left:0;right:0;bottom:0;background:#fff;border-radius:18px 18px 0 0;z-index:21;padding:20px 20px calc(env(safe-area-inset-bottom) + 20px);display:none;max-width:760px;margin:0 auto}
+  .sheet.show,.sheet-bg.show{display:block}
+  .sheet h3{margin:0 0 16px;font-size:1rem;color:var(--navy)}
+  .fs-row{display:flex;align-items:center;gap:12px}
+  .fs-row input{flex:1;accent-color:var(--navy)}
+  .toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#1a1f2b;color:#fff;padding:9px 16px;border-radius:999px;font-size:.85rem;opacity:0;transition:opacity .2s;z-index:30;pointer-events:none;white-space:nowrap}
+  .toast.show{opacity:1}
+  .info p{line-height:1.75;margin:0}
+  .install{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--teal);border-radius:14px;padding:12px 14px;margin-bottom:14px}
+  .install img{width:44px;height:44px;border-radius:10px;flex:none}
+  .install .tx{flex:1;font-size:.86rem;line-height:1.5}
+  .install .tx b{color:var(--navy)}
+  .install .bt{background:var(--navy);color:#fff;border-radius:10px;padding:9px 13px;font-size:.85rem;font-weight:700;flex:none}
+  .install .x{color:var(--sub);font-size:1.1rem;padding:4px;flex:none}
+  .foot{text-align:center;margin-top:26px}
+  .foot img{height:20px;opacity:.85}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <button class="icon-btn" id="backBtn" aria-label="뒤로" style="display:none">←</button>
+    <div class="brand" id="brand"><img src="logo-en.png" alt="KIPROTU"><span class="rt">규정집</span></div>
+    <div class="ptitle" id="ptitle" style="display:none"></div>
+    <button class="icon-btn" id="fsBtn" aria-label="글자 크기">가</button>
+  </div>
+  <div class="search">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a93a5" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="전체 규정 검색 (예: 대의원, 회계감사)" autocomplete="off">
+  </div>
+</header>
+
+<main id="view"></main>
+
+<nav class="tabs">
+  <button data-tab="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/></svg>규정</button>
+  <button data-tab="marks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg>즐겨찾기</button>
+  <button data-tab="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>안내</button>
+</nav>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="fsSheet">
+  <h3>글자 크기</h3>
+  <div class="fs-row"><span style="font-size:13px">가</span><input type="range" id="fsRange" min="14" max="24" step="1"><span style="font-size:22px">가</span></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="rules-data.js"></script>
+<script>
+const DOCS = (window.KIPROTU_DOCS || []).slice().sort((a,b)=>(a.order||0)-(b.order||0));
+
+/* ============================== 파서 ============================== */
+const RE_CH   = /^제\s*\d+\s*장(?!\s*의)/;
+const RE_SEC  = /^제\s*\d+\s*절/;
+const RE_ART  = /^(제\s*\d+\s*조(?:\s*의\s*\d+)?)\s*(?:\(([^)]*)\))?\s*(.*)$/;
+const RE_ADD  = /^부\s*칙\s*$/;
+const RE_FORM = /^\(?\s*(제\s*\d+\s*호\s*양식|별지\s*제?\s*\d+\s*호[^)]*)\s*\)?\s*$/;
+const RE_PRE  = /^전\s*문\s*$/;
+
+function parse(docId, text){
+  const lines = (text||"").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  const arts = []; let mode = "main", chapter = "", section = "", cur = null, addN = 0;
+  const push = a => { a.key = docId + "|" + a.mode + (a.mode==="add"?addN:"") + "|" + a.no.replace(/\s+/g,""); arts.push(a); cur = a; };
+  for(const ln of lines){
+    if(RE_PRE.test(ln)){ mode="pre"; chapter="전문"; section=""; push({mode, no:"전문", title:"", body:[], chapter, section}); continue; }
+    if(RE_ADD.test(ln)){ mode="add"; addN++; chapter="부칙"; section=""; cur=null; continue; }
+    const fm = ln.match(RE_FORM);
+    if(fm && (mode==="add" || mode==="form")){ mode="form"; chapter="별지 서식"; section=""; push({mode, no:fm[1].replace(/\s+/g," "), title:"", body:[], chapter, section}); continue; }
+    if(mode!=="form" && RE_CH.test(ln) && !/조/.test(ln.split(/\s/)[0])){ mode="main"; chapter=ln.replace(/\s+/g," "); section=""; cur=null; continue; }
+    if(mode==="main" && RE_SEC.test(ln)){ section=ln.replace(/\s+/g," "); cur=null; continue; }
+    const m = mode!=="form" && mode!=="pre" ? ln.match(RE_ART) : null;
+    if(m && /^제\s*\d+\s*조/.test(ln)){
+      push({mode, no:m[1].replace(/\s+/g,""), title:(m[2]||"").trim(), body:m[3]?[m[3]]:[], chapter, section});
+      continue;
+    }
+    if(mode==="form" && cur && !cur.title){ cur.title = ln; continue; }
+    if(cur) cur.body.push(ln);
+    else push({mode, no:"·"+arts.length, title:"", body:[ln], chapter, section});
+  }
+  return arts;
+}
+function versionsWithText(d){ return d.history.map((h,i)=>({...h,i})).filter(h=>h.text); }
+function current(d){ const v = versionsWithText(d); return v[v.length-1]; }
+function prevOf(d, i){ const v = versionsWithText(d).filter(h=>h.i<i); return v[v.length-1]; }
+const cache = {};
+function artsOf(d, i){ const k=d.id+"#"+i; return cache[k] || (cache[k] = parse(d.id, d.history[i].text)); }
+
+/* 비교 */
+const norm = a => (a.title+"|"+a.body.join("\n")).replace(/\s+/g," ").trim();
+function diffDoc(d, i){
+  const p = prevOf(d, i); if(!p) return null;
+  const A = artsOf(d, p.i), B = artsOf(d, i);
+  const mapA = new Map(A.map(a=>[a.key,a])), mapB = new Map(B.map(a=>[a.key,a]));
+  const out = [];
+  B.forEach(b=>{ const a = mapA.get(b.key); if(!a) out.push({type:"new", b}); else if(norm(a)!==norm(b)) out.push({type:"mod", a, b}); });
+  A.forEach(a=>{ if(!mapB.has(a.key)) out.push({type:"gone", a}); });
+  return {from:p, to:d.history[i], items:out};
+}
+function changeMap(d){
+  const c = current(d); const r = diffDoc(d, c.i); const m = {};
+  if(r) r.items.forEach(x=>{ if(x.b) m[x.b.key] = x.type; });
+  return m;
+}
+function wordDiff(a, b){
+  const A = a.split(/(\s+)/), B = b.split(/(\s+)/), n=A.length, m=B.length;
+  const dp = Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--) for(let j=m-1;j>=0;j--) dp[i][j] = A[i]===B[j] ? dp[i+1][j+1]+1 : Math.max(dp[i+1][j], dp[i][j+1]);
+  let i=0,j=0,o="",nw="";
+  while(i<n && j<m){
+    if(A[i]===B[j]){ o+=esc(A[i]); nw+=esc(B[j]); i++; j++; }
+    else if(dp[i+1][j]>=dp[i][j+1]){ o+=`<del>${esc(A[i])}</del>`; i++; }
+    else { nw+=`<ins>${esc(B[j])}</ins>`; j++; }
+  }
+  while(i<n){ o+=`<del>${esc(A[i++])}</del>`; } while(j<m){ nw+=`<ins>${esc(B[j++])}</ins>`; }
+  return [o.replace(/\n/g,"<br>"), nw.replace(/\n/g,"<br>")];
+}
+
+/* ============================== 유틸 ============================== */
+const store = {
+  get(k, def){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; }catch(e){ return def; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+let marks = store.get("kiprotu-marks", []);
+let fs = store.get("kiprotu-fs", 16);
+document.documentElement.style.setProperty("--fs", fs+"px");
+const $ = s => document.querySelector(s);
+const view = $("#view");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtD = s => { const [y,m,d] = s.split("-"); return `${y}. ${+m}. ${+d}.`; };
+function hl(s, q){
+  const e = esc(s); if(!q) return e;
+  return e.replace(new RegExp(esc(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), "gi"), m=>`<mark>${m}</mark>`);
+}
+function fmtBody(lines, q){
+  return lines.map(l=>{
+    const h = hl(l, q);
+    if(/^[①-⑳ⓛ]/.test(l)) return `<span class="ln">${h}</span>`;
+    if(/^\d+\.\s?/.test(l)) return `<span class="ln" style="padding-left:2.6em">${h}</span>`;
+    if(/^[가-하]\.\s/.test(l)) return `<span class="ln" style="padding-left:3.8em">${h}</span>`;
+    return `<span>${h}</span>`;
+  }).join("");
+}
+const label = a => (a.mode==="add"?"부칙 ":"") + (a.no.startsWith("·")?"":a.no) + (a.title ? (a.mode==="form"?" "+a.title:`(${a.title})`) : "");
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1600); }
+function findCur(key){ for(const d of DOCS){ const c=current(d); if(!c) continue; const a = artsOf(d,c.i).find(x=>x.key===key); if(a) return {d,a}; } return null; }
+
+/* ============================== 화면 ============================== */
+let st = { doc:null, sub:"arts", ver:null, cmp:null, focus:null };
+
+function setHeader(title){
+  $("#backBtn").style.display = title ? "grid" : "none";
+  $("#brand").style.display = title ? "none" : "flex";
+  $("#ptitle").style.display = title ? "block" : "none";
+  $("#ptitle").textContent = title || "";
+}
+function setTab(t){ document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on", b.dataset.tab===t)); }
+
+function renderHome(){
+  setHeader(""); setTab("home");
+  const all = DOCS.flatMap(d=>d.history.map(h=>({d,h}))).sort((a,b)=>b.h.date.localeCompare(a.h.date));
+  const last = all[0];
+  view.innerHTML = installHTML() + `
+    ${last?`<div class="hero"><div class="k">최근 제·개정</div><div class="v">${esc(last.d.name)} · ${esc(last.h.label)}</div><div class="k" style="margin-top:4px">${fmtD(last.h.date)}</div></div>`:""}
+    <div class="sec-title">수록 규정 ${DOCS.length}건</div>
+    ${DOCS.map(d=>{ const c=current(d); const lh=d.history[d.history.length-1]; const n = c?artsOf(d,c.i).filter(a=>a.mode==="main").length:0;
+      return `<button class="card doc-card" data-doc="${d.id}">
+        <div class="doc-ico">${esc(d.short.slice(0,2))}</div>
+        <div style="flex:1;min-width:0"><div class="t">${esc(d.name)}</div>
+        <div class="s">본칙 ${n}개 조 · ${fmtD(lh.date)} ${esc(lh.label)}</div></div>
+        <span style="color:var(--sub)">›</span></button>`;}).join("")}`;
+}
+
+function artHTML(a, opts){
+  const on = marks.includes(a.key), ch = opts.changes && opts.changes[a.key];
+  const tag = ch==="new" ? `<span class="tag new">신설</span>` : ch==="mod" ? `<span class="tag mod">개정</span>` : "";
+  const no = a.no.startsWith("·") ? "" : a.no;
+  return `<div class="art${opts.open?' open':''}" id="${esc(a.key)}">
+    <button class="art-head" data-toggle="${esc(a.key)}">
+      <span class="no">${hl(no,opts.q)}</span><span class="ti">${hl(a.title,opts.q)}</span>${tag}<span class="chev">›</span>
+    </button>
+    <div class="art-body">${fmtBody(a.body, opts.q)}
+      ${opts.tools?`<div class="art-tools">
+        <button class="chip${on?' on':''}" data-mark="${esc(a.key)}">${on?'★ 즐겨찾기됨':'☆ 즐겨찾기'}</button>
+        <button class="chip" data-copy="${esc(a.key)}">복사</button>
+        ${ch==="mod"?`<button class="chip acc" data-cmpart="${esc(a.key)}">개정 전과 비교</button>`:""}
+      </div>`:""}
+    </div></div>`;
+}
+
+function renderDoc(){
+  const d = DOCS.find(x=>x.id===st.doc); if(!d) return renderHome();
+  setHeader(d.name); setTab("home");
+  const c = current(d);
+  let html = `<div class="seg"><button data-sub="arts" class="${st.sub==="arts"?"on":""}">조문</button><button data-sub="hist" class="${st.sub==="hist"?"on":""}">개정 연혁</button></div>`;
+  if(st.sub==="hist") html += histHTML(d);
+  else if(st.sub==="cmp") html = cmpHTML(d);
+  else{
+    if(!c){ view.innerHTML = html + `<div class="empty">등록된 원문이 없습니다.</div>`; return; }
+    const vi = st.ver ?? c.i, isCur = vi===c.i, h = d.history[vi];
+    const arts = artsOf(d, vi), changes = isCur ? changeMap(d) : {};
+    const nChanged = Object.keys(changes).length;
+    if(!isCur) html += `<div class="banner"><span>📜</span><span style="flex:1"><b>${fmtD(h.date)} ${esc(h.label)}</b> 당시 조문입니다.</span><button class="link" data-ver="cur">현행 보기</button></div>`;
+    html += `<div class="meta"><span>${isCur?"현행":"구"} · ${fmtD(h.date)} ${esc(h.label)}</span>${nChanged?`<span class="tag mod">최근 개정 ${nChanged}개 조</span>`:""}<span class="sp"></span><button class="link" data-all>모두 펼치기</button></div>`;
+    const chapters = [...new Set(arts.map(a=>a.chapter).filter(Boolean))];
+    if(chapters.length>1) html += `<div class="toc">${chapters.map((ch,i)=>`<button data-jump="ch${i}">${esc(ch)}</button>`).join("")}</div>`;
+    let lc=null, ls=null;
+    arts.forEach(a=>{
+      if(a.chapter!==lc){ lc=a.chapter; ls=null; if(a.chapter && a.mode!=="pre") html += `<div class="chapter" id="ch${chapters.indexOf(a.chapter)}">${esc(a.chapter)}</div>`; else if(a.mode==="pre") html += `<span id="ch${chapters.indexOf(a.chapter)}"></span>`; }
+      if(a.section && a.section!==ls){ ls=a.section; html += `<div class="section">${esc(a.section)}</div>`; }
+      html += artHTML(a, {open: a.key===st.focus || a.mode==="pre", tools:isCur, changes});
+    });
+  }
+  view.innerHTML = html;
+  if(st.focus && st.sub==="arts"){ const el = document.getElementById(st.focus); if(el) setTimeout(()=>el.scrollIntoView({behavior:"smooth"}),60); st.focus=null; }
+}
+
+function histHTML(d){
+  const c = current(d);
+  return `<div class="tl">${d.history.map((h,i)=>({h,i})).reverse().map(({h,i})=>{
+    const r = h.text ? diffDoc(d,i) : null;
+    const cnt = r ? {n:r.items.filter(x=>x.type==="new").length, m:r.items.filter(x=>x.type==="mod").length, g:r.items.filter(x=>x.type==="gone").length} : null;
+    return `<div class="tl-item${c&&i===c.i?' cur':''}"><div class="card" style="margin:0">
+      <div class="d">${fmtD(h.date)} <span style="font-weight:500">${esc(h.label)}</span>${c&&i===c.i?' <span class="tag new">현행</span>':''}</div>
+      ${cnt?`<div class="l">신설 ${cnt.n} · 개정 ${cnt.m} · 삭제 ${cnt.g}</div>`:""}
+      ${h.note?`<div class="n">${esc(h.note)}</div>`:""}
+      ${!h.text?`<div class="l">원문 미등록</div>`:""}
+      ${h.text?`<div class="art-tools">${c&&i!==c.i?`<button class="chip" data-ver="${i}">이 버전 조문 보기</button>`:""}${r?`<button class="chip acc" data-cmp="${i}">신구조문 대비</button>`:""}</div>`:""}
+    </div></div>`;}).join("")}</div>`;
+}
+
+function cmpHTML(d){
+  const r = diffDoc(d, st.cmp); if(!r) return `<div class="empty">비교할 이전 버전이 없습니다.</div>`;
+  let items = r.items; if(st.cmpKey) items = items.filter(x=>(x.b||x.a).key===st.cmpKey);
+  const c = t => r.items.filter(x=>x.type===t).length;
+  let h = `<div class="banner"><span>⚖️</span><span style="flex:1"><b>신구조문 대비</b><br>${fmtD(r.from.date)} ${esc(r.from.label)} → ${fmtD(r.to.date)} ${esc(r.to.label)}</span><button class="link" data-back-hist>닫기</button></div>`;
+  if(!st.cmpKey) h += `<div class="sum"><div><b>${c("new")}</b><span>신설</span></div><div><b>${c("mod")}</b><span>개정</span></div><div><b>${c("gone")}</b><span>삭제</span></div></div>`;
+  if(!items.length) h += `<div class="empty">바뀐 조문이 없습니다.</div>`;
+  items.forEach(x=>{
+    const a = x.a, b = x.b, ref = b||a;
+    const tag = {new:'<span class="tag new">신설</span>', mod:'<span class="tag mod">개정</span>', gone:'<span class="tag gone">삭제</span>'}[x.type];
+    h += `<div class="cmp"><div class="cmp-h">${tag}<span>${esc(label(ref))}</span></div>`;
+    if(x.type==="mod"){
+      const [o,n] = wordDiff((a.title?`(${a.title}) `:"")+a.body.join("\n"), (b.title?`(${b.title}) `:"")+b.body.join("\n"));
+      h += `<div class="cmp-c old"><div class="lab">개정 전</div>${o}</div><div class="cmp-c"><div class="lab">개정 후</div>${n}</div>`;
+    } else if(x.type==="new") h += `<div class="cmp-c"><div class="lab">신설 조문</div>${esc(b.body.join("\n")).replace(/\n/g,"<br>")}</div>`;
+    else h += `<div class="cmp-c old"><div class="lab">삭제된 조문</div><del>${esc(a.body.join("\n")).replace(/\n/g,"<br>")}</del></div>`;
+    h += `</div>`;
+  });
+  return h;
+}
+
+function renderSearch(q){
+  setHeader("검색"); setTab("home");
+  const res = [], ql = q.toLowerCase();
+  DOCS.forEach(d=>{ const c=current(d); if(!c) return; artsOf(d,c.i).forEach(a=>{
+    if([a.no,a.title,...a.body].join(" ").toLowerCase().includes(ql)){
+      const line = [a.title,...a.body].find(l=>l.toLowerCase().includes(ql)) || a.body[0] || "";
+      res.push({d,a,line});
+    }});});
+  view.innerHTML = `<div class="sec-title">“${esc(q)}” 검색 결과 ${res.length}건</div>` +
+    (res.length ? res.map(r=>{ let s=r.line; const p=s.toLowerCase().indexOf(ql); if(p>40) s="…"+s.slice(p-30); if(s.length>100) s=s.slice(0,100)+"…";
+      return `<button class="card result" data-goto="${esc(r.a.key)}"><div class="where">${esc(r.d.name)}${r.a.chapter?' · '+esc(r.a.chapter):''}${r.a.section?' · '+esc(r.a.section):''}</div>
+      <div class="what">${hl(label(r.a), q)}</div><div class="snip">${hl(s, q)}</div></button>`;}).join("")
+    : `<div class="empty">일치하는 조문이 없습니다.</div>`);
+}
+
+function renderMarks(){
+  setHeader(""); setTab("marks");
+  const items = marks.map(findCur).filter(Boolean);
+  view.innerHTML = items.length ? `<div class="sec-title">즐겨찾기 ${items.length}개</div>` +
+    items.map(({d,a})=>`<button class="card result" data-goto="${esc(a.key)}"><div class="where">${esc(d.name)}</div><div class="what">${esc(label(a))}</div>
+      <div class="snip">${esc((a.body[0]||'').slice(0,80))}</div></button>`).join("")
+    : `<div class="empty">조문을 펼친 뒤 ‘☆ 즐겨찾기’를 누르면<br>여기에 모아 볼 수 있어요.</div>`;
+}
+
+function renderInfo(){
+  setHeader(""); setTab("info");
+  view.innerHTML = `
+    <div class="card info"><p><b style="color:var(--navy)">사용 방법</b><br>
+      · 상단 검색창으로 모든 규정의 조문을 한 번에 찾을 수 있습니다.<br>
+      · 규정을 열면 장(章) 바로가기와 ‘모두 펼치기’가 있습니다.<br>
+      · 최근 개정된 조문에는 <span class="tag mod">개정</span> <span class="tag new">신설</span> 표시가 붙고, 개정 전 조문과 비교할 수 있습니다.<br>
+      · ‘개정 연혁’ 탭에서 과거 버전 조문과 신구조문 대비를 볼 수 있습니다.<br>
+      · 즐겨찾기와 글자 크기는 이 기기에만 저장됩니다.</p></div>
+    <div class="card info"><p><b style="color:var(--navy)">앱으로 설치하기</b><br>
+      · 안드로이드: Chrome에서 열면 나오는 ‘설치’ 버튼, 또는 ⋮ 메뉴 → ‘앱 설치’(‘홈 화면에 추가’)<br>
+      · 아이폰: Safari 공유 버튼(□↑) → ‘홈 화면에 추가’<br>
+      · 설치 후에는 인터넷이 없어도 마지막으로 받은 규정을 볼 수 있고, 연결되면 개정 내용이 자동 반영됩니다.</p>
+      ${!isStandalone() && deferredPrompt ? `<div class="art-tools"><button class="chip on" data-install>지금 설치하기</button></div>` : ""}</div>
+    <div class="card info"><p><b style="color:var(--navy)">수록 규정</b><br>${DOCS.map(d=>{const l=d.history[d.history.length-1]; return `· ${esc(d.name)} — ${fmtD(l.date)} ${esc(l.label)}`;}).join("<br>")}</p></div>
+    <div class="foot"><img src="logo-ko.png" alt="한국특허기술진흥원노동조합"></div>`;
+}
+
+/* ============================== 설치(PWA) ============================== */
+const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform==="MacIntel" && navigator.maxTouchPoints>1);
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredPrompt = e; if(!location.hash || location.hash==="#home") route(); });
+window.addEventListener("appinstalled", () => { deferredPrompt = null; toast("앱이 설치됐어요"); route(); });
+function installHTML(){
+  if(isStandalone() || store.get("kiprotu-install-hide", false)) return "";
+  if(deferredPrompt) return `<div class="install"><img src="icon-192.png" alt=""><div class="tx"><b>앱으로 설치하기</b><br>홈 화면에서 바로 열고, 인터넷 없이도 볼 수 있어요.</div><button class="bt" data-install>설치</button><button class="x" data-install-hide aria-label="닫기">×</button></div>`;
+  if(isIOS) return `<div class="install"><img src="icon-192.png" alt=""><div class="tx"><b>앱으로 설치하기</b><br>Safari 아래쪽 <b>공유 버튼(□↑)</b> → <b>‘홈 화면에 추가’</b>를 눌러 주세요.</div><button class="x" data-install-hide aria-label="닫기">×</button></div>`;
+  return "";
+}
+if("serviceWorker" in navigator){ window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(()=>{}); }); }
+
+/* ============================== 라우팅 ============================== */
+function route(){
+  const q = $("#q").value.trim();
+  if(q) return renderSearch(q);
+  const h = location.hash.slice(1);
+  if(h==="bookmarks") return renderMarks();
+  if(h==="about") return renderInfo();
+  if(DOCS.some(d=>d.id===h)){ if(st.doc!==h){ st={doc:h, sub:"arts", ver:null, cmp:null, focus:st.focus}; } return renderDoc(); }
+  st.doc=null; renderHome();
+}
+function go(hash){ if(location.hash.slice(1)===hash) route(); else location.hash = hash; }
+window.addEventListener("hashchange", ()=>{ window.scrollTo(0,0); route(); });
+
+let tmr; $("#q").addEventListener("input", ()=>{ clearTimeout(tmr); tmr=setTimeout(route,200); });
+$("#backBtn").addEventListener("click", ()=>{
+  if($("#q").value){ $("#q").value=""; return route(); }
+  if(st.doc && st.sub==="cmp"){ st.sub = st.cmpKey ? "arts" : "hist"; st.cmpKey=null; renderDoc(); return; }
+  if(st.doc && st.ver!=null){ st.ver=null; renderDoc(); return; }
+  go("home");
+});
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click", ()=>{ $("#q").value=""; go({home:"home",marks:"bookmarks",info:"about"}[b.dataset.tab]); }));
+
+view.addEventListener("click", e=>{
+  const t = e.target.closest("button,[data-toggle]"); if(!t) return;
+  const ds = t.dataset;
+  if("install" in ds){ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.finally(()=>{ deferredPrompt=null; route(); }); } return; }
+  if("installHide" in ds){ store.set("kiprotu-install-hide", true); route(); return; }
+  if(ds.doc) return go(ds.doc);
+  if(ds.toggle) return document.getElementById(ds.toggle).classList.toggle("open");
+  if(ds.jump) return document.getElementById(ds.jump)?.scrollIntoView({behavior:"smooth"});
+  if("all" in ds){ const arts=[...view.querySelectorAll(".art")]; const open=!arts.every(a=>a.classList.contains("open")); arts.forEach(a=>a.classList.toggle("open",open)); t.textContent=open?"모두 접기":"모두 펼치기"; return; }
+  if(ds.sub){ st.sub=ds.sub; st.ver=null; st.cmpKey=null; window.scrollTo(0,0); return renderDoc(); }
+  if(ds.ver){ st.sub="arts"; st.ver = ds.ver==="cur" ? null : +ds.ver; window.scrollTo(0,0); return renderDoc(); }
+  if(ds.cmp){ st.sub="cmp"; st.cmp=+ds.cmp; st.cmpKey=null; window.scrollTo(0,0); return renderDoc(); }
+  if(ds.cmpart){ const d=DOCS.find(x=>x.id===st.doc); st.sub="cmp"; st.cmp=current(d).i; st.cmpKey=ds.cmpart; window.scrollTo(0,0); return renderDoc(); }
+  if("backHist" in ds){ st.sub = st.cmpKey ? "arts" : "hist"; st.cmpKey=null; return renderDoc(); }
+  if(ds.goto){ const f=findCur(ds.goto); if(!f) return; $("#q").value=""; st={doc:f.d.id, sub:"arts", ver:null, cmp:null, focus:f.a.key}; if(location.hash.slice(1)===f.d.id) renderDoc(); else location.hash=f.d.id; return; }
+  if(ds.mark){
+    const k=ds.mark; marks = marks.includes(k) ? marks.filter(x=>x!==k) : [...marks,k]; store.set("kiprotu-marks", marks);
+    const on=marks.includes(k); t.classList.toggle("on",on); t.textContent=on?"★ 즐겨찾기됨":"☆ 즐겨찾기";
+    return toast(on?"즐겨찾기에 추가했어요":"즐겨찾기에서 뺐어요");
+  }
+  if(ds.copy){
+    const f=findCur(ds.copy); const txt=`[${f.d.name}] ${label(f.a)}\n${f.a.body.join("\n")}`;
+    navigator.clipboard.writeText(txt).then(()=>toast("조문을 복사했어요")).catch(()=>toast("복사가 지원되지 않는 환경이에요"));
+  }
+});
+
+const sheet=$("#fsSheet"), bg=$("#sheetBg"), range=$("#fsRange"); range.value=fs;
+$("#fsBtn").addEventListener("click", ()=>{ sheet.classList.add("show"); bg.classList.add("show"); });
+bg.addEventListener("click", ()=>{ sheet.classList.remove("show"); bg.classList.remove("show"); });
+range.addEventListener("input", ()=>{ fs=+range.value; document.documentElement.style.setProperty("--fs", fs+"px"); store.set("kiprotu-fs", fs); });
+
+route();
+</script>
+</body>
+</html>
